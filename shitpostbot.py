@@ -161,9 +161,12 @@ def main():
 	while True:
 		config = json.load(open(os.path.join(path, "shitpostconfig.json")))
 		text = generate(debug=True)
-		print(text)
-		print("\n")
-		api.update_status(text)
+		try:
+			api.update_status(text)
+			print(text)
+			print("\n")
+		except:
+			print("error occurred\n\n")
 		slept = 0
 		while slept < config["time"]:
 			config = json.load(open(os.path.join(path, "shitpostconfig.json")))
