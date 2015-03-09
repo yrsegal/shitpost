@@ -158,8 +158,12 @@ def main():
 		file = open(os.path.join(path, "shitpostconfig.json"), "w")
 		file.write("{\"time\": 360,\"notifytime\": 60}")
 		file.close()
+	lastmodtime = os.path.getctime(os.path.join(path, "shitpostconfig.json"))
+	config = json.load(open(os.path.join(path, "shitpostconfig.json")))
 	while True:
-		config = json.load(open(os.path.join(path, "shitpostconfig.json")))
+		if os.path.getctime(os.path.join(path, "shitpostconfig.json")) > lastmodtime:
+			config = json.load(open(os.path.join(path, "shitpostconfig.json")))
+			lastmodtime = os.path.getctime(os.path.join(path, "shitpostconfig.json"))
 		text = generate(debug=True)
 		try:
 			api.update_status(text)
@@ -170,7 +174,9 @@ def main():
 		started = time.time()
 		stopped = time.time()
 		while stopped-started < config["time"]:
-			config = json.load(open(os.path.join(path, "shitpostconfig.json")))
+			if os.path.getctime(os.path.join(path, "shitpostconfig.json")) > lastmodtime:
+				config = json.load(open(os.path.join(path, "shitpostconfig.json")))
+				lastmodtime = os.path.getctime(os.path.join(path, "shitpostconfig.json"))
 			if not int(stopped-started) % config["notifytime"] and int(stopped-started) != 0: 
 				print("Slept "+str(int(stopped-started))+" seconds.")
 			time.sleep(1)
