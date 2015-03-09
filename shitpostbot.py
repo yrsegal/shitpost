@@ -167,13 +167,14 @@ def main():
 			print("\n")
 		except:
 			print("error occurred\n\n")
-		slept = 0
-		while slept < config["time"]:
+		started = time.time()
+		stopped = time.time()
+		while stopped-started < config["time"]:
 			config = json.load(open(os.path.join(path, "shitpostconfig.json")))
-			if not slept % config["notifytime"] and slept != 0: print("Slept "+str(slept)+" seconds.")
+			if not stopped-started % config["notifytime"] and stopped-started != 0: print("Slept "+str(stopped-started)+" seconds.")
 			time.sleep(1)
-			slept += 1
-		print("Slept "+str(slept)+" seconds.")
+			stopped = time.time()
+		print("Slept "+str(config["time"])+" seconds.")
 		print(" ")
 
 
