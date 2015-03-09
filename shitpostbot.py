@@ -171,7 +171,8 @@ def main():
 		stopped = time.time()
 		while stopped-started < config["time"]:
 			config = json.load(open(os.path.join(path, "shitpostconfig.json")))
-			if not stopped-started % config["notifytime"] and stopped-started != 0: print("Slept "+str(stopped-started)+" seconds.")
+			if not int(stopped-started) % config["notifytime"] and int(stopped-started) != 0: 
+				print("Slept "+str(int(stopped-started))+" seconds.")
 			time.sleep(1)
 			stopped = time.time()
 		print("Slept "+str(config["time"])+" seconds.")
