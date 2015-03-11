@@ -138,6 +138,7 @@ def generate(debug=False):
 			base = base.replace("%ved", randpop(tempve), 1)
 		base = base.replace("%v", randpop(tempv), 1)
 		base = base.replace("%i", str(random.randint(2, 20)), 1)
+	if debug: print(base)
 	return base
 
 authKeyPath = os.path.dirname(sys.argv[0])
