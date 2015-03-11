@@ -165,6 +165,11 @@ def main():
 			config = json.load(open(os.path.join(path, "shitpostconfig.json")))
 			lastmodtime = os.path.getctime(os.path.join(path, "shitpostconfig.json"))
 		text = generate(debug=True)
+		if "override" in config:
+			print("overriding")
+			text = config["override"]
+			del config["override"]
+			json.dump(config, open(os.path.join(path, "shitpostconfig.json"), "w"), indent = 2)
 		try:
 			api.update_status(text)
 			print(text)
