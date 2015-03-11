@@ -169,6 +169,7 @@ def main():
 		if "override" in config:
 			print("overriding")
 			text = config["override"]
+			print(text)
 			del config["override"]
 			json.dump(config, open(os.path.join(path, "shitpostconfig.json"), "w"), indent = 2)
 		try:
