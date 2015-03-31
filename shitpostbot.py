@@ -61,7 +61,7 @@ adjective = [ "%n-shaped", "%n-hating", "%n-%ving", "american",
 "suburban", "tasty", "tender", "tiny", "trans", "transgender",
 "transphobic", "unacceptable", "undead", "unexpected",
 "unstoppable", "unused", "unwanted", "useless", "weak",
-"weaponized" ]
+"weaponized", "fatherly" ]
 plusadj = [ "concerningly", "desperately", "disgustingly", "impossibly",
 "incredibly", "mostly", "obviously", "only", "otherwise", "really",
 "secretly", "slightly", "suprisingly", "unfortunately", "very",
@@ -109,7 +109,7 @@ pastverb = [ "abandoned", "adopted", "annoyed", "attacked", "aroused",
 "seduced", "smacked", "smelled", "stabbed", "sucked", "stopped", "studied", "trusted",
 "understood", "upset", "watched", "won", "worshipped" ]
 adverb = [ "accidentally", "carefully", "casually",
-"desperately", "eventually", "fatherly", "fondly", "gently", "immidiately",
+"desperately", "eventually", "fondly", "gently", "immidiately",
 "purposely", "quickly", "seductively", "slowly", "softly",
 "sucessfully", "tenderly" ]
 
@@ -178,6 +178,13 @@ def main():
 			print("\n")
 		except:
 			print("error occurred\n\n")
+			time.sleep(10)
+			try:
+				api.update_status(text)
+				print(text)
+				print("\n")
+			except:
+				print("error occurred\n\n")
 		started = time.time()
 		stopped = time.time()
 		while stopped-started < config["time"]:
