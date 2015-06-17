@@ -173,18 +173,18 @@ def main():
 			del config["override"]
 			json.dump(config, open(os.path.join(path, "shitpostconfig.json"), "w"), indent = 2)
 		try:
-			api.update_status(text)
+			api.update_status(status=text)
 			print(text)
 			print("\n")
-		except:
-			print("error occurred\n\n")
+		except Exception, e:
+			print("error occurred: "+str(e)+"\n\n")
 			time.sleep(10)
 			try:
-				api.update_status(text)
+				api.update_status(status=text)
 				print(text)
 				print("\n")
-			except:
-				print("error occurred\n\n")
+			except Exception, e:
+				print("error occurred: "+str(e)+"\n\n")
 		started = time.time()
 		stopped = time.time()
 		while stopped-started < config["time"]:
