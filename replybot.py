@@ -1,4 +1,4 @@
-
+# coding=utf-8
 from shitpostbot import *
 import atexit
 import multiprocessing
@@ -16,7 +16,6 @@ class cSL(tweepy.StreamListener):
 		if jdata.get('text')[:2] != "RT" and not retweeted and not from_self:
 			try:
 				text = generate(debug=True)
-				print(text)
 				api.update_status(status="@"+jdata.get('user', {}).get('screen_name')+" "+text, in_reply_to_status_id = jdata.get('id_str', ''))
 			except Exception, e:
 				print "failed: "+str(e)
