@@ -2,6 +2,7 @@
 from shitpostbot import *
 import atexit
 import multiprocessing
+path = os.path.dirname(sys.argv[0])
 
 class cSL(tweepy.StreamListener):
  
@@ -29,10 +30,11 @@ class cSL(tweepy.StreamListener):
 		return True
  
 def tweetStream():
+	config = json.load(open(os.path.join(path, "shitpostconfig.json")))
 	l = cSL()
 	stream = tweepy.Stream(api.auth, l)
 	while True:
-		stream.filter(track=["gimme a shitpost"])
+		stream.filter(track=[config["searchfor"]])
 
 def cleanup():
 	global replyThread, mainThread
@@ -42,6 +44,10 @@ def cleanup():
 def centralmain():
 	global replyThread, mainThread
 	atexit.register(cleanup)
+	if not os.path.exists(os.path.join(path, "shitpostconfig.json")):
+		file = open(os.path.join(path, "shitpostconfig.json"), "w")
+		file.write("{\"time\": 360,\"notifytime\": 60,\"searchfor\": \"gimme a shitpost\"}")
+		file.close()
 	replyThread = multiprocessing.Process(target=tweetStream)
 	mainThread = multiprocessing.Process(target=main)
 	replyThread.start()

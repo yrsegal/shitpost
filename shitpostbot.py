@@ -157,7 +157,7 @@ def main():
 	path = os.path.dirname(sys.argv[0])
 	if not os.path.exists(os.path.join(path, "shitpostconfig.json")):
 		file = open(os.path.join(path, "shitpostconfig.json"), "w")
-		file.write("{\"time\": 360,\"notifytime\": 60}")
+		file.write("{\"time\": 360,\"notifytime\": 60,\"searchfor\": \"gimme a shitpost\"}")
 		file.close()
 	lastmodtime = os.path.getctime(os.path.join(path, "shitpostconfig.json"))
 	config = json.load(open(os.path.join(path, "shitpostconfig.json")))
