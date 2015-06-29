@@ -23,12 +23,12 @@ class cSL(tweepy.StreamListener):
 	def on_data(self, data):
 		jdata = json.loads(data.strip())
 		name = jdata.get('user', {}).get('screen_name', 'Name Not Found')
-		selfname = api.me().get('screen_name', 'Name Not Found')
+		selfname = api.me().screen_name
 		print jdata.get('user', {}).get('name', 'Name Not Found')
 		print jdata.get('text')
  
 		retweeted = jdata.get('retweeted', None)
-		from_self = jdata.get('user',{}).get('id',0) == api.me().get('id', 0)
+		from_self = jdata.get('user',{}).get('id',0) == api.me().id
 		people = jdata.get('entities', {}).get('user_mentions', [])
 		peoplenames = getUniques([i.get('screen_name') for i in people])
 		if name in peoplenames:     peoplenames.remove(name)
