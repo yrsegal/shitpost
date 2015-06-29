@@ -23,18 +23,17 @@ class cSL(tweepy.StreamListener):
 	def on_data(self, data):
 		jdata = json.loads(data.strip())
 		name = jdata.get('user', {}).get('screen_name', 'Name Not Found')
+		selfname = api.me().get('screen_name', 'Name Not Found')
 		print jdata.get('user', {}).get('name', 'Name Not Found')
 		print jdata.get('text')
  
 		retweeted = jdata.get('retweeted', None)
-		from_self = jdata.get('user',{}).get('id_str','') == "3068055436"
+		from_self = jdata.get('user',{}).get('id',0) == api.me().get('id', 0)
 		people = jdata.get('entities', {}).get('user_mentions', [])
 		peoplenames = getUniques([i.get('screen_name') for i in people])
-		while name in peoplenames:
-			peoplenames.remove(name)
+		if name in peoplenames:     peoplenames.remove(name)
+		if selfname in peoplenames: peoplenames.remove(selfname)
 		peoplenames.insert(0, name)
-		if "postingshittily" in peoplenames:
-			peoplenames.remove("postingshittily")
 		names = " ".join(["@{}".format(i) for i in peoplenames if i])
  
 		if jdata.get('text')[:2] != "RT" and not retweeted and not from_self:
@@ -57,7 +56,7 @@ def tweetStream():
 	l = cSL()
 	stream = tweepy.Stream(api.auth, l)
 	while True:
-		stream.filter(track=[config["searchfor"]])
+		stream.filter(track=[config.get("searchfor", "gimme a shitpost")])
 
 def cleanup():
 	global replyThread, mainThread

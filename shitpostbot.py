@@ -187,11 +187,11 @@ def main():
 				print("error occurred: "+str(e)+"\n\n")
 		started = time.time()
 		stopped = time.time()
-		while stopped-started < config["time"]:
+		while stopped-started < config.get("time", 360):
 			if os.path.getctime(os.path.join(path, "shitpostconfig.json")) > lastmodtime:
 				config = json.load(open(os.path.join(path, "shitpostconfig.json")))
 				lastmodtime = os.path.getctime(os.path.join(path, "shitpostconfig.json"))
-			if not int(stopped-started) % config["notifytime"] and int(stopped-started) != 0: 
+			if not int(stopped-started) % config.get("notifytime", 60) and int(stopped-started) != 0: 
 				print("Slept "+str(int(stopped-started))+" seconds.")
 			time.sleep(1)
 			stopped = time.time()
