@@ -56,7 +56,11 @@ def tweetStream():
 	l = cSL()
 	stream = tweepy.Stream(api.auth, l)
 	while True:
-		stream.filter(track=[config.get("searchfor", "gimme a shitpost")])
+		try:
+			stream.filter(track=[config.get("searchfor", "gimme a shitpost")])
+		except Exception, e:
+			if type(e) is KeyboardInterrupt: break
+			print "failed: "+str(e)
 
 def cleanup():
 	global replyThread, mainThread
