@@ -64,7 +64,7 @@ def tweetStream():
 	elif isinstance(config.get("searchfor"), list):
 		targets = config.get("searchfor")
 	else:
-		targets.append("gimme a shitpost")
+		targets = ["gimme a shitpost", "gimme a public shitpost"]
 
 	while True:
 		try:
@@ -82,9 +82,11 @@ def centralmain():
 	global replyThread, mainThread
 	atexit.register(cleanup)
 	if not os.path.exists(os.path.join(path, "shitpostconfig.json")):
-		file = open(os.path.join(path, "shitpostconfig.json"), "w")
-		file.write("{\"time\": 360,\"notifytime\": 60,\"searchfor\": \"gimme a shitpost\"}")
-		file.close()
+		json.dump({
+			"time": 360,
+			"notifytime": 60,
+			"searchfor": ["gimme a shitpost", "gimme a public shitpost"]
+			}, open(os.path.join(path, "shitpostconfig.json"), "w"), indent=2, sort_keys=True)
 	replyThread = multiprocessing.Process(target=tweetStream)
 	mainThread = multiprocessing.Process(target=main)
 	replyThread.start()
