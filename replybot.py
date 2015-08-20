@@ -28,18 +28,20 @@ class cSL(tweepy.StreamListener):
 		print jdata.get('text')
  
 		retweeted = jdata.get('retweeted', None)
-		from_self = jdata.get('user',{}).get('id',0) == api.me().id
+		from_self = jdata.get('user', {}).get('id',0) == api.me().id
 		people = jdata.get('entities', {}).get('user_mentions', [])
 		peoplenames = getUniques([i.get('screen_name') for i in people])
 		if name in peoplenames:     peoplenames.remove(name)
 		if selfname in peoplenames: peoplenames.remove(selfname)
 		peoplenames.insert(0, name)
 		names = " ".join(["@{}".format(i) for i in peoplenames if i])
- 
-		if jdata.get('text')[:2] != "RT" and not retweeted and not from_self:
+
+		dot = "." if "public" in jdata.get('text', '') else ""
+
+		if jdata.get('text', '')[:2] != "RT" and not retweeted and not from_self:
 			try:
 				text = generate(debug=True)
-				api.update_status(status=names+" "+text, in_reply_to_status_id = jdata.get('id_str', ''))
+				api.update_status(status=dot+names+" "+text, in_reply_to_status_id = jdata.get('id_str', ''))
 			except Exception, e:
 				print "failed: "+str(e)
 		time.sleep(2)
