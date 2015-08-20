@@ -57,9 +57,18 @@ def tweetStream():
 	config = json.load(open(os.path.join(path, "shitpostconfig.json")))
 	l = cSL()
 	stream = tweepy.Stream(api.auth, l)
+
+	targets = []
+	if isinstance(config.get("searchfor"), str):
+		targets.append(config.get("searchfor"))
+	elif isinstance(config.get("searchfor"), list):
+		targets = config.get("searchfor")
+	else:
+		targets.append("gimme a shitpost")
+
 	while True:
 		try:
-			stream.filter(track=[config.get("searchfor", "gimme a shitpost")])
+			stream.filter(track=targets)
 		except Exception, e:
 			if type(e) is KeyboardInterrupt: break
 			print "failed: "+str(e)
