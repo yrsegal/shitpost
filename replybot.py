@@ -36,10 +36,18 @@ class cSL(tweepy.StreamListener):
 		peoplenames.insert(0, name)
 		names = " ".join(["@{}".format(i) for i in peoplenames if i])
 
-		dot = "." if "public" in jdata.get('text', '') else ""
+		dot = "." if config.get('public') in jdata.get('text', '') else ""
 
-		if "just" in jdata.get('text', '') and "do it" in jdata.get('text', ''):
-			dot, names = "", ""
+		if isinstance(jdata.get('notags'), str):
+			if jdata.get('notags') in jdata.get('text', ''):
+				dot, names = "", ""
+		elif isinstance(jdata.get('notags'), list):
+			removedots = True
+			for i in jdata.get('notags'):
+				if i not in jdata.get('text', ''):
+					removedots = False
+			if removedots:
+				dot, names = "", ""
 
 		if jdata.get('text', '')[:2] != "RT" and not retweeted and not from_self:
 			try:
@@ -90,7 +98,9 @@ def centralmain():
 		json.dump({
 			"time": 360,
 			"notifytime": 60,
-			"searchfor": ["gimme a shitpost", "gimme a public shitpost"]
+			"searchfor": ["gimme a shitpost", "gimme a public shitpost"],
+			"public": "public",
+			"notags": ["just", "do it"]
 			}, open(os.path.join(path, "shitpostconfig.json"), "w"), indent=2, sort_keys=True)
 	replyThread = multiprocessing.Process(target=tweetStream)
 	mainThread = multiprocessing.Process(target=main)

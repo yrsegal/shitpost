@@ -162,7 +162,9 @@ def getIps(test=False):
 	"""
 	Get the IPs this device controls.
 	"""
-	from netifaces import interfaces, ifaddresses, AF_INET
+	try:
+		from netifaces import interfaces, ifaddresses, AF_INET
+	except: return ["install netifaces >:("]
 	ips = []
 	for ifaceName in interfaces():
 		addresses = [i['addr'] for i in ifaddresses(ifaceName).get(AF_INET, [{"addr":"not found"}])]
