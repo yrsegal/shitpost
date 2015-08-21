@@ -38,7 +38,7 @@ class cSL(tweepy.StreamListener):
 
 		dot = "." if "public" in jdata.get('text', '') else ""
 
-		if "just do it" in jdata.get('text', ''):
+		if "just" in jdata.get('text', '') and "do it" in jdata.get('text', ''):
 			dot, names = "", ""
 
 		if jdata.get('text', '')[:2] != "RT" and not retweeted and not from_self:
