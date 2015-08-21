@@ -22,9 +22,10 @@ class cSL(tweepy.StreamListener):
  
 	def on_data(self, data):
 		jdata = json.loads(data.strip())
-		name = jdata.get('user', {}).get('screen_name', 'Name Not Found')
+		name = jdata.get('user', {}).get('screen_name', 'Name not found')
+		displayname = jdata.get('user', {}).get('name', 'Name not found')
 		selfname = api.me().screen_name
-		print jdata.get('user', {}).get('name', 'Name Not Found')
+		print "{} ({})".format(displayname, name)
 		print jdata.get('text')
  
 		retweeted = jdata.get('retweeted', False)
