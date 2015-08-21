@@ -27,7 +27,7 @@ class cSL(tweepy.StreamListener):
 		print jdata.get('user', {}).get('name', 'Name Not Found')
 		print jdata.get('text')
  
-		retweeted = jdata.get('retweeted', None)
+		retweeted = jdata.get('retweeted', False)
 		from_self = jdata.get('user', {}).get('id',0) == api.me().id
 		people = jdata.get('entities', {}).get('user_mentions', [])
 		peoplenames = getUniques([i.get('screen_name') for i in people])
