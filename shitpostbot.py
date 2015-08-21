@@ -143,15 +143,34 @@ def generate(debug=False):
 
 authKeyPath = os.path.dirname(sys.argv[0])
 if not os.path.exists(os.path.join(authKeyPath, "authkeys.json")):
-	file = open(os.path.join(authKeyPath, "authkeys.json"), "w")
-	file.write("{\"TWITTER_CONSUMER_KEY\":\"\",\"TWITTER_CONSUMER_SECRET\":\"\",\"TWITTER_ACCESS_KEY\":\"\",\"TWITTER_ACCESS_SECRET\":\"\"}")
-	file.close()
+	json.dumps({
+		"TWITTER_CONSUMER_KEY": "",
+		"TWITTER_CONSUMER_SECRET": "",
+		"TWITTER_ACCESS_KEY": "",
+		"TWITTER_ACCESS_SECRET": ""
+		}, open(os.path.join(authKeyPath, "authkeys.json"), "w"), , indent=2, sort_keys=True)
+
 a = json.load(open(os.path.join(authKeyPath, "authkeys.json")))
 
 auth = tweepy.OAuthHandler(a["TWITTER_CONSUMER_KEY"], a["TWITTER_CONSUMER_SECRET"])
 auth.set_access_token(a["TWITTER_ACCESS_KEY"], a["TWITTER_ACCESS_SECRET"])
 api = tweepy.API(auth)	
 
+def connected_to_internet():
+	return bool(getIps(test=True))
+def getIps(test=False):
+	"""
+	Get the IPs this device controls.
+	"""
+	from netifaces import interfaces, ifaddresses, AF_INET
+	ips = []
+	for ifaceName in interfaces():
+		addresses = [i['addr'] for i in ifaddresses(ifaceName).get(AF_INET, [{"addr":"not found"}])]
+		if "not found" not in addresses and "127.0.0.1" not in addresses:
+			ips += addresses
+	if not ips and not test: 
+		ips.append("localhost")
+	return ips
 
 def main():
 	path = os.path.dirname(sys.argv[0])
@@ -172,19 +191,13 @@ def main():
 			print(text)
 			del config["override"]
 			json.dump(config, open(os.path.join(path, "shitpostconfig.json"), "w"), indent = 2)
-		try:
-			api.update_status(status=text)
-			print(text)
-			print("\n")
-		except Exception, e:
-			print("error occurred: "+str(e)+"\n\n")
-			time.sleep(10)
-			try:
-				api.update_status(status=text)
-				print(text)
-				print("\n")
-			except Exception, e:
-				print("error occurred: "+str(e)+"\n\n")
+		
+		while not connected_to_internet():
+			time.sleep(1)
+
+		api.update_status(status=text)
+		print(text)
+		print("\n")
 		started = time.time()
 		stopped = time.time()
 		while stopped-started < config.get("time", 360):

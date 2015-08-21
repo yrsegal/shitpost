@@ -1,1 +1,5 @@
 # shitpost
+
+## Dependencies:
+`tweepy`
+`netifaces`

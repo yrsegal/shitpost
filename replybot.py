@@ -68,6 +68,8 @@ def tweetStream():
 
 	while True:
 		try:
+			while not connected_to_internet():
+				time.sleep(1)
 			stream.filter(track=targets)
 		except Exception, e:
 			if type(e) is KeyboardInterrupt: break
