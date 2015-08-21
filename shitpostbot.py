@@ -148,7 +148,7 @@ if not os.path.exists(os.path.join(authKeyPath, "authkeys.json")):
 		"TWITTER_CONSUMER_SECRET": "",
 		"TWITTER_ACCESS_KEY": "",
 		"TWITTER_ACCESS_SECRET": ""
-		}, open(os.path.join(authKeyPath, "authkeys.json"), "w"), , indent=2, sort_keys=True)
+		}, open(os.path.join(authKeyPath, "authkeys.json"), "w"), indent=2, sort_keys=True)
 
 a = json.load(open(os.path.join(authKeyPath, "authkeys.json")))
 
