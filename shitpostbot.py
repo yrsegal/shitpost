@@ -191,8 +191,10 @@ def main():
 		
 		while not connected_to_internet():
 			time.sleep(1)
-
-		api.update_status(status=text)
+		try:
+			api.update_status(status=text)
+		except Exception, e:
+			cprint(tbformat(e, "Error sending tweet:"), color=bcolors.YELLOW)
 		cprint(text)
 		started = time.time()
 		stopped = time.time()
