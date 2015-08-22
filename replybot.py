@@ -25,8 +25,9 @@ class cSL(tweepy.StreamListener):
 		name = jdata.get('user', {}).get('screen_name', 'Name not found')
 		displayname = jdata.get('user', {}).get('name', 'Name not found')
 		selfname = api.me().screen_name
-		print "{} ({})".format(displayname, name)
-		print jdata.get('text')
+		print()
+		cprint(format("{name} ({handle})", name=displayname, handle=name))
+		cprint(jdata.get('text'))
  
 		retweeted = jdata.get('retweeted', False)
 		from_self = jdata.get('user', {}).get('id',0) == api.me().id
@@ -35,7 +36,7 @@ class cSL(tweepy.StreamListener):
 		if name in peoplenames:     peoplenames.remove(name)
 		if selfname in peoplenames: peoplenames.remove(selfname)
 		peoplenames.insert(0, name)
-		names = " ".join(["@{}".format(i) for i in peoplenames if i])
+		names = " ".join([format("@{handle}", handle=i) for i in peoplenames if i])
 
 		dot = "." if config.get('public') in jdata.get('text', '') else ""
 
@@ -55,37 +56,34 @@ class cSL(tweepy.StreamListener):
 				text = generate(debug=True)
 				api.update_status(status=dot+names+" "+text, in_reply_to_status_id = jdata.get('id_str', ''))
 			except Exception, e:
-				print "failed: "+str(e)
-		time.sleep(2)
-
+				cprint(tbformat(e, "Error in sending tweet:"), color=bcolors.RED)
 		return True
  
 	def on_error(self, status):
-		print status
+		cprint("Error: "+str(status), color=bcolors.DARKRED)
 		time.sleep(5)
 		return True
  
 def tweetStream():
-	config = json.load(open(os.path.join(path, "shitpostconfig.json")))
 	l = cSL()
 	stream = tweepy.Stream(api.auth, l)
 
-	targets = []
-	if isinstance(config.get("searchfor"), str):
-		targets.append(config.get("searchfor"))
-	elif isinstance(config.get("searchfor"), list):
-		targets = config.get("searchfor")
-	else:
-		targets = ["gimme a shitpost", "gimme a public shitpost"]
-
 	while True:
 		try:
+			targets = []
+			if isinstance(config.get("searchfor"), str):
+				targets.append(config.get("searchfor"))
+			elif isinstance(config.get("searchfor"), list):
+				targets = config.get("searchfor")
+			else:
+				targets = ["gimme a shitpost", "gimme a public shitpost"]
 			while not connected_to_internet():
 				time.sleep(1)
 			stream.filter(track=targets)
 		except Exception, e:
-			if type(e) is KeyboardInterrupt: break
-			print "failed: "+str(e)
+			if type(e) is KeyboardInterrupt: 
+				break
+			cprint(tbformat(e, "Error in stream filter:"), color=bcolors.RED)
 
 def cleanup():
 	global replyThread, mainThread

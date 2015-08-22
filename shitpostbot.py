@@ -1,6 +1,10 @@
 # coding=utf-8
 
 from copy import deepcopy
+from util import *
+cprintconf.name="Shitposting"
+cprintconf.color=bcolors.BROWN
+config = Config(CONFIGDIR)
 import random
 import tweepy
 import time
@@ -129,7 +133,7 @@ def generate(debug=False):
 	base = random.choice(prefix)
 
 	while "%" in base:
-		if debug: print(base)
+		if debug: cprint(base)
 		base = base.replace("%s", randpop(temps), 1)
 		base = base.replace("%j", randpop(tempj), 1)
 		base = base.replace("%n", randpop(tempn), 1)
@@ -138,7 +142,7 @@ def generate(debug=False):
 			base = base.replace("%ved", randpop(tempve), 1)
 		base = base.replace("%v", randpop(tempv), 1)
 		base = base.replace("%i", str(random.randint(2, 20)), 1)
-	if debug: print(base)
+	if debug: cprint(base)
 	return base
 
 authKeyPath = os.path.dirname(sys.argv[0])
@@ -176,21 +180,12 @@ def getIps(test=False):
 
 def main():
 	path = os.path.dirname(sys.argv[0])
-	if not os.path.exists(os.path.join(path, "shitpostconfig.json")):
-		file = open(os.path.join(path, "shitpostconfig.json"), "w")
-		file.write("{\"time\": 360,\"notifytime\": 60,\"searchfor\": \"gimme a shitpost\"}")
-		file.close()
-	lastmodtime = os.path.getctime(os.path.join(path, "shitpostconfig.json"))
-	config = json.load(open(os.path.join(path, "shitpostconfig.json")))
 	while True:
-		if os.path.getctime(os.path.join(path, "shitpostconfig.json")) > lastmodtime:
-			config = json.load(open(os.path.join(path, "shitpostconfig.json")))
-			lastmodtime = os.path.getctime(os.path.join(path, "shitpostconfig.json"))
 		text = generate(debug=True)
 		if "override" in config:
-			print("overriding")
+			cprint("Overriding generated text.", color=bcolors.YELLOW)
 			text = config["override"]
-			print(text)
+			cprint(text)
 			del config["override"]
 			json.dump(config, open(os.path.join(path, "shitpostconfig.json"), "w"), indent = 2)
 		
@@ -198,20 +193,15 @@ def main():
 			time.sleep(1)
 
 		api.update_status(status=text)
-		print(text)
-		print("\n")
+		cprint(text)
 		started = time.time()
 		stopped = time.time()
 		while stopped-started < config.get("time", 360):
-			if os.path.getctime(os.path.join(path, "shitpostconfig.json")) > lastmodtime:
-				config = json.load(open(os.path.join(path, "shitpostconfig.json")))
-				lastmodtime = os.path.getctime(os.path.join(path, "shitpostconfig.json"))
 			if not int(stopped-started) % config.get("notifytime", 60) and int(stopped-started) != 0: 
-				print("Slept "+str(int(stopped-started))+" seconds.")
+				cprint("Slept "+str(int(stopped-started))+" seconds.")
 			time.sleep(1)
 			stopped = time.time()
-		print("Slept "+str(config["time"])+" seconds.")
-		print(" ")
+		cprint("Slept "+str(config["time"])+" seconds.")
 
 
 if __name__ == "__main__": main()
