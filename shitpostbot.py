@@ -1,5 +1,5 @@
 # coding=utf-8
-
+from __future__ import print_function
 from copy import deepcopy
 from util import *
 cprintconf.name="Shitposting"
@@ -198,9 +198,12 @@ def main():
 		stopped = time.time()
 		while stopped-started < config.get("time", 360):
 			if not int(stopped-started) % config.get("notifytime", 60) and int(stopped-started) != 0: 
+				if int(stopped-started) != config.get("notifytime", 60): print(bcolors.REMAKELINE, end="")
 				cprint("Slept "+str(int(stopped-started))+" seconds.")
 			time.sleep(1)
 			stopped = time.time()
+
+		if int(stopped-started) != config.get("notifytime", 60): print(bcolors.REMAKELINE, end="")
 		cprint("Slept "+str(config["time"])+" seconds.")
 
 

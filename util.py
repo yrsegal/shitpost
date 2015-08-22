@@ -127,6 +127,7 @@ if supports_color():
 		ORANGE = '\033[38;5;202m'
 		DARKPURPLE = '\033[38;5;53m'
 		BROWN = '\033[38;5;94m'
+		REMAKELINE = '\033[F\033[K'
 		ENDC = '\033[0m'
 		COLORS = {
 			"black": BLACK,
@@ -174,6 +175,7 @@ else:
 		ORANGE = ''
 		DARKPURPLE = ''
 		BROWN = ''
+		REMAKELINE = ''
 		ENDC = ''
 		COLORS = {
 			"black": BLACK,
