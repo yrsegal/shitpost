@@ -25,7 +25,7 @@ class cSL(tweepy.StreamListener):
 		name = jdata.get('user', {}).get('screen_name', 'Name not found')
 		displayname = jdata.get('user', {}).get('name', 'Name not found')
 		selfname = api.me().screen_name
-		print()
+		cprint("Replying to tweet: ")
 		cprint(format("{name} ({handle})", name=displayname, handle=name))
 		cprint(jdata.get('text'))
  
