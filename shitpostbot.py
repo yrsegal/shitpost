@@ -143,6 +143,12 @@ def generate(debug=False):
 		base = base.replace("%v", randpop(tempv), 1)
 		base = base.replace("%i", str(random.randint(2, 20)), 1)
 	if debug: cprint(base)
+	if "override" in config:
+			cprint("Overriding generated text.", color=bcolors.YELLOW)
+			text = config["override"]
+			cprint(text)
+			del config["override"]
+			json.dump(config, open(os.path.join(path, "shitpostconfig.json"), "w"), indent = 2)
 	return base
 
 authKeyPath = os.path.dirname(sys.argv[0])
@@ -182,12 +188,6 @@ def main():
 	path = os.path.dirname(sys.argv[0])
 	while True:
 		text = generate(debug=True)
-		if "override" in config:
-			cprint("Overriding generated text.", color=bcolors.YELLOW)
-			text = config["override"]
-			cprint(text)
-			del config["override"]
-			json.dump(config, open(os.path.join(path, "shitpostconfig.json"), "w"), indent = 2)
 		
 		while not connected_to_internet():
 			time.sleep(1)
