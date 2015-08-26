@@ -201,8 +201,9 @@ def main():
 		started = time.time()
 		stopped = time.time()
 		while stopped-started < config.get("time", 360):
+			print()
 			if not int(stopped-started) % config.get("notifytime", 60) and int(stopped-started) != 0: 
-				if int(stopped-started) != config.get("notifytime", 60): print(bcolors.REMAKELINE, end="")
+				print(bcolors.REMAKELINE, end="")
 				cprint("Slept "+str(int(stopped-started))+" seconds.")
 			time.sleep(1)
 			stopped = time.time()
