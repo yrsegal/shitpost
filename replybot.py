@@ -27,7 +27,7 @@ class cSL(tweepy.StreamListener):
 		displayname = jdata.get('user', {}).get('name', 'Name not found')
 		selfname = api.me().screen_name
 		cprint("Replying to tweet: ")
-		cprint(format("{name} ({handle})", name=displayname, handle=name))
+		cprint(format("{name} (@{handle})", name=displayname, handle=name))
 		cprint(jdata.get('text'))
  
 		retweeted = jdata.get('retweeted', False)
@@ -56,6 +56,7 @@ class cSL(tweepy.StreamListener):
 			try:
 				text = generate(debug=True)
 				api.update_status(status=dot+names+" "+text, in_reply_to_status_id = jdata.get('id_str', ''))
+				cprint(format("Sent tweet: {text}", text=dot+names+" "+text))
 			except Exception, e:
 				cprint(tbformat(e, "Error in sending tweet:"), color=bcolors.RED)
 		print()
@@ -86,6 +87,7 @@ def tweetStream():
 			if type(e) is KeyboardInterrupt: 
 				break
 			cprint(tbformat(e, "Error in stream filter:"), color=bcolors.RED)
+			print()
 
 def cleanup():
 	global replyThread, mainThread

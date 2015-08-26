@@ -195,9 +195,10 @@ def main():
 			time.sleep(1)
 		try:
 			api.update_status(status=text)
+			cprint(format("Made tweet: {text}", text=text))
 		except Exception, e:
 			cprint(tbformat(e, "Error sending tweet:"), color=bcolors.YELLOW)
-		cprint(text)
+			print()
 		started = time.time()
 		stopped = time.time()
 		cprint("Slept 0 seconds.")
