@@ -200,8 +200,8 @@ def main():
 		cprint(text)
 		started = time.time()
 		stopped = time.time()
+		cprint("Slept 0 seconds.")
 		while stopped-started < config.get("time", 360):
-			print()
 			if not int(stopped-started) % config.get("notifytime", 60) and int(stopped-started) != 0: 
 				print(bcolors.REMAKELINE, end="")
 				cprint("Slept "+str(int(stopped-started))+" seconds.")

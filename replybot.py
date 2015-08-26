@@ -1,4 +1,5 @@
 # coding=utf-8
+from __future__ import print_function
 from shitpostbot import *
 import atexit
 import multiprocessing
@@ -57,6 +58,7 @@ class cSL(tweepy.StreamListener):
 				api.update_status(status=dot+names+" "+text, in_reply_to_status_id = jdata.get('id_str', ''))
 			except Exception, e:
 				cprint(tbformat(e, "Error in sending tweet:"), color=bcolors.RED)
+		print()
 		return True
  
 	def on_error(self, status):
