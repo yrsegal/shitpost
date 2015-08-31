@@ -84,7 +84,7 @@ def tweetStream():
 				time.sleep(1)
 			stream.filter(track=targets)
 		except Exception, e:
-			if type(e) is KeyboardInterrupt: 
+			if isinstance(e, KeyboardInterrupt): 
 				break
 			cprint(tbformat(e, "Error in stream filter:"), color=bcolors.RED)
 			print()

@@ -189,28 +189,32 @@ def getIps(test=False):
 
 def main():
 	while True:
-		text = generate(debug=True)
-		
-		while not connected_to_internet():
-			time.sleep(1)
 		try:
-			api.update_status(status=text)
-			cprint(format("Made tweet: {text}", text=text))
-		except Exception, e:
-			cprint(tbformat(e, "Error sending tweet:"), color=bcolors.YELLOW)
-			print()
-		started = time.time()
-		stopped = time.time()
-		cprint("Slept 0 seconds.")
-		while stopped-started < config.get("time", 360):
-			if not int(stopped-started) % config.get("notifytime", 60) and int(stopped-started) != 0: 
-				print(bcolors.REMAKELINE, end="")
-				cprint("Slept "+str(int(stopped-started))+" seconds.")
-			time.sleep(1)
+			text = generate(debug=True)
+			
+			while not connected_to_internet():
+				time.sleep(1)
+			try:
+				api.update_status(status=text)
+				cprint(format("Made tweet: {text}", text=text))
+			except Exception, e:
+				if isinstance(e, KeyboardInterrupt):
+					break
+				cprint(tbformat(e, "Error sending tweet:"), color=bcolors.YELLOW)
+			started = time.time()
 			stopped = time.time()
+			cprint("Slept 0 seconds.")
+			while stopped-started < config.get("time", 360):
+				if not int(stopped-started) % config.get("notifytime", 60) and int(stopped-started) != 0: 
+					print(bcolors.REMAKELINE, end="")
+					cprint("Slept "+str(int(stopped-started))+" seconds.")
+				time.sleep(1)
+				stopped = time.time()
 
-		if int(stopped-started) != config.get("notifytime", 60): print(bcolors.REMAKELINE, end="")
-		cprint("Slept "+str(config["time"])+" seconds.")
+			if int(stopped-started) != config.get("notifytime", 60): print(bcolors.REMAKELINE, end="")
+			cprint("Slept "+str(config["time"])+" seconds.")
+		except KeyboardInterrupt:
+			pass
 
 
 if __name__ == "__main__": main()
