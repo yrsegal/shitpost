@@ -241,7 +241,7 @@ cprintconf = colorconf() # create the instance of colorconf used to configure cp
 
 lastprinted = None
 
-def cprint(text, color="", strip=False, func=print, add_newline=False, colorconfig = None):
+def cprint(text, color="", strip=False, func=print, add_newline=False, colorconfig = None, **kwargs):
 	"""
 	Pretty print `text`, with `color` as its color, using `func`.
 	If `strip`, then remove whitespace from both sides of each line.
@@ -249,7 +249,10 @@ def cprint(text, color="", strip=False, func=print, add_newline=False, colorconf
 	global lastprinted
 	if not colorconfig:
 		colorconfig = cprintconf
-	text = str(text)
+	if "whitespace" not in kwargs:
+		kwargs["whitespace"] = colorconfig.whitespace()
+	kwargs["color"] = color
+	text = format(str(text), **kwargs)
 
 	# Make sure not to print the same thing twice
 	if text == lastprinted: return
@@ -277,14 +280,17 @@ def cprint(text, color="", strip=False, func=print, add_newline=False, colorconf
 			  text = i)) # Print all consecutive lines
 			if add_newline: func("\n")
 
-def cinput(text, color="", strip=False, func=raw_input, add_newline=False, colorconfig = None):
+def cinput(text, color="", strip=False, func=raw_input, add_newline=False, colorconfig = None, **kwargs):
 	"""
 	Pretty print `text`, with `color` as its color. Take input using `func` on the last line.
 	If `strip`, then remove whitespace from both sides of each line.
 	"""
 	if not colorconfig:
 		colorconfig = cprintconf
-	text = str(text)
+	if "whitespace" not in kwargs:
+		kwargs["whitespace"] = colorconfig.whitespace()
+	kwargs["color"] = color
+	text = format(str(text), **kwargs)
 	# Split the text by lines
 	if strip:
 		prints = [i.strip().rstrip() for i in text.split("\n")]
