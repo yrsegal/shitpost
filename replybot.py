@@ -29,6 +29,7 @@ class cSL(tweepy.StreamListener):
 		cprint("Replying to tweet: ")
 		cprint(format("{name} (@{handle})", name=displayname, handle=name))
 		cprint(jdata.get('text'))
+		print()
  
 		retweeted = jdata.get('retweeted', False)
 		from_self = jdata.get('user', {}).get('id',0) == api.me().id
@@ -41,12 +42,12 @@ class cSL(tweepy.StreamListener):
 
 		dot = "." if config.get('public') in jdata.get('text', '') else ""
 
-		if isinstance(jdata.get('notags'), str):
-			if jdata.get('notags') in jdata.get('text', ''):
+		if isinstance(config.get('notags'), str):
+			if config.get('notags') in jdata.get('text', ''):
 				dot, names = "", ""
-		elif isinstance(jdata.get('notags'), list):
+		elif isinstance(config.get('notags'), list):
 			removedots = True
-			for i in jdata.get('notags'):
+			for i in config.get('notags'):
 				if i not in jdata.get('text', ''):
 					removedots = False
 			if removedots:
