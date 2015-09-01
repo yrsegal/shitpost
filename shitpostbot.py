@@ -64,7 +64,8 @@ plurnoun = [ "%s in a %n suit", "%n fans",
 "plants", "pets", "pirates", "rabbits", "racoons", "rats", "regrets", "republicans",
 "robots", "sharks", "shovels", "skeletons", "sins", "sons", "snakes",
 "spiders", "spoons", "sports", "sticks", "teenagers", "trees", "trains", "traitors",
-"vampires", "video games", "walnuts", "zombies", "marmite", "salad" ]
+"vampires", "video games", "walnuts", "zombies", "marmite", "salad", "penises", "pikmin", "international %n treaties",
+"%a kinky %s", "poops"]
 
 adjective = [ "%n-shaped", "%n-hating", "%n-%ving", "american",
 "angry", "animated", "annoying", "awful", "bad", "beautiful",
@@ -111,7 +112,8 @@ prefix = [ "%s", "%s?", "%j %n", "%i %s",
 "you can’t %v %s", "you can’t prove %s aren’t %s",
 "your %s %ved my %n", "get away from my %n", "how can %s be real if %s aren't real", 
 "help, my %n won't stop %ving", "am I a %n", "%s should really %v %s", "%s??? %s!", "eat all the %s", 
-"I sexually identify as a %j %n.", "%ving is as easy as %ving %s"]
+"I sexually identify as a %j %n.", "%ving is as easy as %ving %s", "if %s came from %s, then why are there still %s?",
+"i like to %v my %n %a", "*%a %vs*"]
 verb = [ "abandon", "adopt", "annoy", "attack", "arouse",
 "avoid", "beat", "befriend", "build", "burn", "buy", "caress",
 "confuse", "cosplay", "count", "date", "doxx", "destroy", "disrespect",
