@@ -28,7 +28,8 @@ basenoun = [ "%n-worshipping cult", "%n %ver",
 "plant", "pet", "pirate", "rabbit", "racoon", "rat", "regret", "republican",
 "robot", "shark", "shovel", "skeleton", "sin", "son", "snake",
 "spider", "spoon", "sport", "stick", "teenager", "tree", "train", "traitor",
-"vampire", "video game", "walnut", "zombie", "piano", "ladder", "nostril", "illuminati"]
+"vampire", "video game", "walnut", "zombie", "piano", "ladder", "nostril", "illuminati", 
+"selfie", "poop", "slave", "eyebrows"]
 
 singnoun = [ "%n with %i %s", "agenda", "ass",
 "baby", "blender", "bowl of soup", "brony", "%n mixed with a %n",
@@ -41,7 +42,7 @@ singnoun = [ "%n with %i %s", "agenda", "ass",
 "country of %s", "snowman", "strongly-worded letter",
 "%n with a %n allergy", "sum of money", "spy", "taste of humanity",
 "%n and their army of %s", "taxidermy", "tragedy", "werewolf",
-"wife", "wizard", "woman", "illuminati" ]
+"wife", "wizard", "woman", "illuminati", "%n-flavored %n", "extremely %j %n"]
 plurnoun = [ "%s in a %n suit", "%n fans",
 "aliens from the %n planet", "anime", "asses", "babies", "beefs", "%n laws",
 "bronies", "children", "dollars", "elders", "families",
@@ -63,7 +64,7 @@ plurnoun = [ "%s in a %n suit", "%n fans",
 "plants", "pets", "pirates", "rabbits", "racoons", "rats", "regrets", "republicans",
 "robots", "sharks", "shovels", "skeletons", "sins", "sons", "snakes",
 "spiders", "spoons", "sports", "sticks", "teenagers", "trees", "trains", "traitors",
-"vampires", "video games", "walnuts", "zombies" ]
+"vampires", "video games", "walnuts", "zombies", "marmite", "salad" ]
 
 adjective = [ "%n-shaped", "%n-hating", "%n-%ving", "american",
 "angry", "animated", "annoying", "awful", "bad", "beautiful",
@@ -82,11 +83,11 @@ adjective = [ "%n-shaped", "%n-hating", "%n-%ving", "american",
 "suburban", "tasty", "tender", "tiny", "trans", "transgender",
 "transphobic", "unacceptable", "undead", "unexpected",
 "unstoppable", "unused", "unwanted", "useless", "weak",
-"weaponized", "fatherly" ]
+"weaponized", "fatherly", "dank", "arousing", "funny" ]
 plusadj = [ "concerningly", "desperately", "disgustingly", "impossibly",
 "incredibly", "mostly", "obviously", "only", "otherwise", "really",
 "secretly", "slightly", "suprisingly", "unfortunately", "very",
-"wildly" ]
+"wildly", "arousingly", "forcefully", "furiously" ]
 prefix = [ "%s", "%s?", "%j %n", "%i %s",
 "%a %v your %n", "%s are %j", "%s aren’t that %j",
 "%s are %j but can they %v this *%vs a %n*", "a %n that isn’t %j",
@@ -109,7 +110,8 @@ prefix = [ "%s", "%s?", "%j %n", "%i %s",
 "why not %v %s", "why do %s %v me?", "why did i %v a %n",
 "you can’t %v %s", "you can’t prove %s aren’t %s",
 "your %s %ved my %n", "get away from my %n", "how can %s be real if %s aren't real", 
-"help, my %n won't stop %ving", "am I a %n", "%s should really %v %s"]
+"help, my %n won't stop %ving", "am I a %n", "%s should really %v %s", "%s??? %s!", "eat all the %s", 
+"I sexually identify as a %j %n.", "%ving is as easy as %ving %s"]
 verb = [ "abandon", "adopt", "annoy", "attack", "arouse",
 "avoid", "beat", "befriend", "build", "burn", "buy", "caress",
 "confuse", "cosplay", "count", "date", "doxx", "destroy", "disrespect",
