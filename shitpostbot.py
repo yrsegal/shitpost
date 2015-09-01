@@ -28,7 +28,7 @@ basenoun = [ "%n-worshipping cult", "%n %ver",
 "plant", "pet", "pirate", "rabbit", "racoon", "rat", "regret", "republican",
 "robot", "shark", "shovel", "skeleton", "sin", "son", "snake",
 "spider", "spoon", "sport", "stick", "teenager", "tree", "train", "traitor",
-"vampire", "video game", "walnut", "zombie" ]
+"vampire", "video game", "walnut", "zombie", "piano", "ladder", "nostril", "illuminati"]
 
 singnoun = [ "%n with %i %s", "agenda", "ass",
 "baby", "blender", "bowl of soup", "brony", "%n mixed with a %n",
@@ -41,7 +41,7 @@ singnoun = [ "%n with %i %s", "agenda", "ass",
 "country of %s", "snowman", "strongly-worded letter",
 "%n with a %n allergy", "sum of money", "spy", "taste of humanity",
 "%n and their army of %s", "taxidermy", "tragedy", "werewolf",
-"wife", "wizard", "woman" ]
+"wife", "wizard", "woman", "illuminati" ]
 plurnoun = [ "%s in a %n suit", "%n fans",
 "aliens from the %n planet", "anime", "asses", "babies", "beefs", "%n laws",
 "bronies", "children", "dollars", "elders", "families",
@@ -49,7 +49,22 @@ plurnoun = [ "%s in a %n suit", "%n fans",
 "genitals", "knives", "milks", "members of the %ving club", "men", "money",
 "pants", "%n regulations", "pastas", "pizza", "people who %v %s", "pornos",
 "sheep", "spaghetties", "spies", "strawberries", "taxes",
-"tragedies", "trash", "white people", "women", "words" ]
+"tragedies", "trash", "white people", "women", "words",
+"aliens", "animals", "ants", "apples", "assholes", "balls", "bands",
+"bears", "bees", "birds", "boobs", "books", "breasts", "boats", "boys",
+"bros", "cars", "cats", "centaurs", "clowns", "communists", "cops", "corpses",
+"crabs", "crimes", "dads", "desks", "dicks", "dogs", "dinosaurs",
+"disgraces", "doctors", "dongs", "doors", "dragons", "ducks", "dudes",
+"eels", "eggs", "failures", "fathers", "fires", "flags", "flowers", "friends",
+"frogs", "games", "gamers", "genders", "giraffes", "girls", "goats",
+"gods", "humans", "hotdogs", "horses", "ideas", "iguanas", "lawyers", "lemons",
+"lesbians", "lizards", "lobsters", "losers", "mangos", "memes", "mimes",
+"mistakes", "moms", "movies", "nerds", "orbs", "original characters",
+"plants", "pets", "pirates", "rabbits", "racoons", "rats", "regrets", "republicans",
+"robots", "sharks", "shovels", "skeletons", "sins", "sons", "snakes",
+"spiders", "spoons", "sports", "sticks", "teenagers", "trees", "trains", "traitors",
+"vampires", "video games", "walnuts", "zombies" ]
+
 adjective = [ "%n-shaped", "%n-hating", "%n-%ving", "american",
 "angry", "animated", "annoying", "awful", "bad", "beautiful",
 "big", "boring", "burning", "capitalist", "cheating", "cis",
@@ -93,7 +108,8 @@ prefix = [ "%s", "%s?", "%j %n", "%i %s",
 "why are %s so %j", "why aren’t %s %j", "why %v %s when you can %v a %n",
 "why not %v %s", "why do %s %v me?", "why did i %v a %n",
 "you can’t %v %s", "you can’t prove %s aren’t %s",
-"your %s %ved my %n" ]
+"your %s %ved my %n", "get away from my %n", "how can %s be real if %s aren't real", 
+"help, my %n won't stop %ving", "am I a %n", "%s should really %v %s"]
 verb = [ "abandon", "adopt", "annoy", "attack", "arouse",
 "avoid", "beat", "befriend", "build", "burn", "buy", "caress",
 "confuse", "cosplay", "count", "date", "doxx", "destroy", "disrespect",
