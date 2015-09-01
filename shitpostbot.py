@@ -29,7 +29,8 @@ basenoun = [ "%n-worshipping cult", "%n %ver",
 "robot", "shark", "shovel", "skeleton", "sin", "son", "snake",
 "spider", "spoon", "sport", "stick", "teenager", "tree", "train", "traitor",
 "vampire", "video game", "walnut", "zombie", "piano", "ladder", "nostril", "illuminati", 
-"selfie", "poop", "slave", "eyebrows"]
+"selfie", "poop", "slave", "eyebrows", "deer", "parachute", "pushup", "vegetarian",
+"dinosaur", "thumb", "pinkie", "raindeer", "quack", "hockeypuck"]
 
 singnoun = [ "%n with %i %s", "agenda", "ass",
 "baby", "blender", "bowl of soup", "brony", "%n mixed with a %n",
