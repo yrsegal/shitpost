@@ -8,6 +8,8 @@ if __name__ == "__main__":
 		nwordsi = []
 		for j in words[i]:
 			if j not in nwordsi:
+				j = j.replace(".", "")
+				j = j.lower()
 				nwordsi.append(j)
 		nwordsi.sort()
 		words[i] = nwordsi
