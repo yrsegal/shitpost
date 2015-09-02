@@ -10,8 +10,7 @@ if __name__ == "__main__":
 		nwordsi = []
 		for j in words[i]:
 			if j not in nwordsi:
-				j = j.replace(".", "")
-				j = j.lower()
+				j = j.replace(".", "").lower().strip().rstrip()
 				nwordsi.append(j)
 		nwordsi.sort()
 		nwords[i] = nwordsi
