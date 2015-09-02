@@ -15,5 +15,5 @@ if __name__ == "__main__":
 				nwordsi.append(j)
 		nwordsi.sort()
 		nwords[i] = nwordsi
-	nwords["_timestamp"] = "Generated at "+time.asctime()
-	json.dump(words, open(wordpath, "w"), indent=2, sort_keys=True)
+	nwords["_timestamp"] = "Generated at "+time.asctime(time.gmtime()) + " UTC"
+	json.dump(nwords, open(wordpath, "w"), indent=2, sort_keys=True)
