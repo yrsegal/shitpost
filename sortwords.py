@@ -1,7 +1,7 @@
 import json, os, time
 
 path = os.path.dirname(__file__)
-wordpath = os.path.join(path, "defaultwords.json")
+wordpath = os.path.join(path, "words.json")
 if __name__ == "__main__":
 	words = json.load(open(wordpath))
 	nwords = {}

@@ -19,9 +19,7 @@ def randpop(iterable):
 	return iterable.pop(random.randrange(len(iterable)))
 
 if not os.path.exists(os.path.join(path, "words.json")):
-	words = json.load(open("defaultwords.json"))
-	if "_timestamp" in words: del words["_timestamp"]
-	json.dump(words, open(os.path.join(path, "words.json"), "w"), indent=2, sort_keys=True)
+	raise ValueError("There aren't any words to generate from!")
 
 genobjects = Config(os.path.join(path, "words.json"))
 def generate(debug=False):
