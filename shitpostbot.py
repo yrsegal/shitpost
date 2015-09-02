@@ -14,8 +14,8 @@ import sys
 path = os.path.dirname(__file__)
 
 def randpop(iterable):
-	if len(iterable) == 0:
-		return random.choice(adverb)
+	if not len(iterable):
+		return random.choice(genobjects['adverb'])
 	return iterable.pop(random.randrange(len(iterable)))
 
 if not os.path.exists(os.path.join(path, "words.json")):
