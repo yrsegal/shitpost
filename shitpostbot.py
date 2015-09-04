@@ -49,6 +49,7 @@ def generate(debug=False):
 		cprint(format("New text: {endc}{base}", base=base), color=bcolors.YELLOW)
 		del tempconf["override"]
 		json.dump(tempconf, open(os.path.join(path, "shitpostconfig.json"), "w"), indent = 2)
+	genobjects.reload()
 	return base
 
 authKeyPath = os.path.dirname(sys.argv[0])

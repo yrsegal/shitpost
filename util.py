@@ -48,20 +48,21 @@ class Config:
 		self.path = path
 		self.lastmodtime = os.path.getctime(path) # get the last modified time of the target file
 		self.data = json.load(open(path))
-	def reload(self):
+	def checkreload(self):
 		if os.path.getctime(self.path) > self.lastmodtime: # check the last modified time of the target file
-			self.data = json.load(open(self.path))
-			self.lastmodtime = os.path.getctime(self.path)
-
-	# These are extensions of self.data's methods, except they run self.reload.
+			self.reload()
+	def reload(self):
+		self.data = json.load(open(self.path))
+		self.lastmodtime = os.path.getctime(self.path)
+	# These are extensions of self.data's methods, except they run self.checkreload.
 	def __getitem__(self, y):
-		self.reload()
+		self.checkreload()
 		return self.data[y]
 	def __contains__(self, key):
-		self.reload()
+		self.checkreload()
 		return key in self.data
 	def get(self, k, d=None):
-		self.reload()
+		self.checkreload()
 		return self.data.get(k, d)
 
 
