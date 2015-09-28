@@ -10,24 +10,27 @@ import tweepy
 path = os.path.dirname(__file__)
 
 genobjects = Config(os.path.join(path, "words.json"))
-def randsub(string, words, regex):
-	if regex not in words or not words[regex]:
-		words[regex] = genobjects[genobjects["@replaces"][regex]]
-	word = words[regex].pop(random.randrange(len(words[regex])))
-	return re.sub("%"+regex, word, string, 1), words
+def randsub(string, regex):
+	global genwords
+	if regex not in genwords or not genwords[regex]:
+		genwords[regex] = genobjects[genobjects["@replaces"][regex]]
+	word = genwords[regex].pop(random.randrange(len(genwords[regex])))
+	return re.sub("%"+regex, word, string, 1)
 
 if not os.path.exists(os.path.join(path, "words.json")):
 	raise ValueError("There aren't any words to generate from!")
 
+
+genwords = {}
 def generate(debug=False):
-	words = {}
+	global genwords
 
 	base = random.choice(genobjects["@bases"])
 
 	while "%" in base:
 		if debug: cprint(base)
 		for regex in genobjects["@replaces"]:
-			base, words = randsub(base, words, regex)
+			base = randsub(base, regex)
 		
 	if debug: cprint(base)
 	if "override" in config:
