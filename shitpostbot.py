@@ -6,41 +6,29 @@ cprintconf.color=bcolors.BROWN
 config = Config(CONFIGDIR)
 import random
 import tweepy
-import time
-import json
-import os
-import sys
 
 path = os.path.dirname(__file__)
 
-def randpop(iterable):
-	if not len(iterable):
-		return random.choice(genobjects['adverb'])
-	return iterable.pop(random.randrange(len(iterable)))
+genobjects = Config(os.path.join(path, "words.json"))
+def randsub(string, words, regex):
+	if regex not in words or not words[regex]:
+		words[regex] = genobjects[genobjects["@replaces"][regex]]
+	word = words[regex].pop(random.randrange(len(words[regex])))
+	return re.sub("%"+regex, word, string, 1), words
 
 if not os.path.exists(os.path.join(path, "words.json")):
 	raise ValueError("There aren't any words to generate from!")
 
-genobjects = Config(os.path.join(path, "words.json"))
 def generate(debug=False):
-	temps = genobjects['plurnoun']
-	tempj = genobjects['adjective']
-	tempn = genobjects['noun']
-	tempav = genobjects['adverb']
-	tempve = genobjects['pastverb']
-	tempv = genobjects['verb']
-	base = random.choice(genobjects['base'])
+	words = {}
+
+	base = random.choice(genobjects["@bases"])
 
 	while "%" in base:
 		if debug: cprint(base)
-		base = base.replace("%s", randpop(temps), 1)
-		base = base.replace("%j", randpop(tempj), 1)
-		base = base.replace("%n", randpop(tempn), 1)
-		base = base.replace("%a", randpop(tempav), 1)
-		while "%ved" in base:
-			base = base.replace("%ved", randpop(tempve), 1)
-		base = base.replace("%v", randpop(tempv), 1)
-		base = base.replace("%i", str(random.randint(2, 20)), 1)
+		for regex in genobjects["@replaces"]:
+			base, words = randsub(base, words, regex)
+		
 	if debug: cprint(base)
 	if "override" in config:
 		tempconf = config.data
