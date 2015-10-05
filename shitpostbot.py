@@ -21,11 +21,13 @@ if not os.path.exists(os.path.join(path, "words.json")):
 	raise ValueError("There aren't any words to generate from!")
 
 
-genwords = {}
+genwords, bases = {}, []
 def generate(debug=False):
-	global genwords
+	global genwords, bases
 
-	base = random.choice(genobjects["@bases"])
+	if not bases:
+		bases = genobjects["@bases"]
+	base = bases.pop(random.randrange(len(bases)))
 
 	while "%" in base:
 		if debug: cprint(base)
