@@ -16,4 +16,9 @@ if __name__ == "__main__":
 			nwords.sort()
 			words[i] = nwords
 	words["#timestamp"] = "Generated at "+time.asctime(time.gmtime()) + " UTC"
-	json.dump(words, open(wordpath, "w"), indent=2, sort_keys=True)
+	wordtext = json.dumps(words, indent=2, sort_keys=True)
+	nwordtext = ""
+	for i in wordtext:
+		if 0 <= ord(i) < 128:
+			nwordtext += i
+	open(wordpath, "w").write(nwordtext)
