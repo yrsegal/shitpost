@@ -2,6 +2,7 @@
 from __future__ import print_function
 from shitpostbot import *
 import atexit
+import string
 import multiprocessing
 path = os.path.dirname(sys.argv[0])
 
@@ -22,14 +23,13 @@ def getUniques(l):
 class cSL(tweepy.StreamListener):
  
 	def on_data(self, data):
-		jdata = json.loads(data.strip())
+		jdata = json.loads(''.join(filter(lambda x: x in string.printable, data.strip())))
 		name = jdata.get('user', {}).get('screen_name', 'Name not found')
 		displayname = jdata.get('user', {}).get('name', 'Name not found')
 		selfname = api.me().screen_name
 		cprint("Replying to tweet: ")
 		cprint(format("{name} (@{handle})", name=displayname, handle=name))
 		cprint(jdata.get('text'))
-		print()
  
 		retweeted = jdata.get('retweeted', False)
 		from_self = jdata.get('user', {}).get('id',0) == api.me().id

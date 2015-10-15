@@ -1,4 +1,4 @@
-import json, os, time, re
+import json, os, time, re, string
 
 whitespace = re.compile(r"\s+")
 
@@ -16,9 +16,5 @@ if __name__ == "__main__":
 			nwords.sort()
 			words[i] = nwords
 	words["#timestamp"] = "Generated at "+time.asctime(time.gmtime()) + " UTC"
-	wordtext = json.dumps(words, indent=2, sort_keys=True)
-	nwordtext = ""
-	for i in wordtext:
-		if 0 <= ord(i) < 128:
-			nwordtext += i
-	open(wordpath, "w").write(nwordtext)
+	wordtext = ''.join(filter(lambda x: x in string.printable, json.dumps(words, indent=2, sort_keys=True)))
+	open(wordpath, "w").write(wordtext)
