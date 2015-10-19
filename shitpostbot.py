@@ -1,8 +1,8 @@
 # coding=utf-8
 from __future__ import print_function
-from util import *
-cprintconf.name="Shitposting"
-cprintconf.color=bcolors.BROWN
+from wireutils import *
+color_printing_config.name="Shitposting"
+color_printing_config.color=ansi_colors.BROWN
 config = Config(CONFIGDIR)
 import random
 import tweepy
@@ -30,16 +30,16 @@ def generate(debug=False):
 	base = bases.pop(random.randrange(len(bases)))
 
 	while "%" in base:
-		if debug: cprint(base)
+		if debug: color_print(base)
 		for regex in genobjects["@replaces"]:
 			base = randsub(base, regex)
 		
-	if debug: cprint(base)
+	if debug: color_print(base)
 	if "override" in config:
 		tempconf = config.data
-		cprint("Overriding generated text.", color=bcolors.YELLOW)
+		color_print("Overriding generated text.", color=ansi_colors.YELLOW)
 		base = config["override"]
-		cprint(format("New text: {endc}{base}", base=base), color=bcolors.YELLOW)
+		color_print(format("New text: {endc}{base}", base=base), color=ansi_colors.YELLOW)
 		del tempconf["override"]
 		json.dump(tempconf, open(os.path.join(path, "shitpostconfig.json"), "w"), indent = 2)
 	genobjects.reload()
@@ -87,23 +87,23 @@ def main():
 				time.sleep(1)
 			try:
 				api.update_status(status=text)
-				cprint(format("Made tweet: {text}", text=text))
+				color_print(format("Made tweet: {text}", text=text))
 			except Exception, e:
 				if isinstance(e, KeyboardInterrupt):
 					break
-				cprint(tbformat(e, "Error sending tweet:"), color=bcolors.YELLOW)
+				color_print(tbformat(e, "Error sending tweet:"), color=ansi_colors.YELLOW)
 			started = time.time()
 			stopped = time.time()
-			cprint("Slept 0 seconds.")
+			color_print("Slept 0 seconds.")
 			while stopped-started < config.get("time", 360):
 				if not int(stopped-started) % config.get("notifytime", 60) and int(stopped-started) != 0: 
-					print(bcolors.REMAKELINE, end="")
-					cprint("Slept "+str(int(stopped-started))+" seconds.")
+					print(ansi_colors.REMAKELINE, end="")
+					color_print("Slept "+str(int(stopped-started))+" seconds.")
 				time.sleep(1)
 				stopped = time.time()
 
-			if int(stopped-started) != config.get("notifytime", 60): print(bcolors.REMAKELINE, end="")
-			cprint("Slept "+str(config["time"])+" seconds.")
+			if int(stopped-started) != config.get("notifytime", 60): print(ansi_colors.REMAKELINE, end="")
+			color_print("Slept "+str(config["time"])+" seconds.")
 		except KeyboardInterrupt:
 			pass
 

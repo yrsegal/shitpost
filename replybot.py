@@ -27,9 +27,9 @@ class cSL(tweepy.StreamListener):
 		name = jdata.get('user', {}).get('screen_name', 'Name not found')
 		displayname = jdata.get('user', {}).get('name', 'Name not found').encode('ascii',errors='ignore')
 		selfname = api.me().screen_name
-		cprint("Replying to tweet: ")
-		cprint(format("{name} (@{handle})", name=displayname, handle=name))
-		cprint(jdata.get('text'))
+		color_print("Replying to tweet: ")
+		color_print(format("{name} (@{handle})", name=displayname, handle=name))
+		color_print(jdata.get('text'))
  
 		retweeted = jdata.get('retweeted', False)
 		from_self = jdata.get('user', {}).get('id',0) == api.me().id
@@ -57,14 +57,14 @@ class cSL(tweepy.StreamListener):
 			try:
 				text = generate(debug=True)
 				api.update_status(status=dot+names+" "+text, in_reply_to_status_id = jdata.get('id_str', ''))
-				cprint(format("Sent tweet: {text}", text=dot+names+" "+text))
+				color_print(format("Sent tweet: {text}", text=dot+names+" "+text))
 			except Exception, e:
-				cprint(tbformat(e, "Error in sending tweet:"), color=bcolors.RED)
+				color_print(tbformat(e, "Error in sending tweet:"), color=ansi_colors.RED)
 		print()
 		return True
  
 	def on_error(self, status):
-		cprint("Error: "+str(status), color=bcolors.DARKRED)
+		color_print("Error: "+str(status), color=ansi_colors.DARKRED)
 		time.sleep(5)
 		return True
  
@@ -87,7 +87,7 @@ def tweetStream():
 		except Exception, e:
 			if isinstance(e, KeyboardInterrupt): 
 				break
-			cprint(tbformat(e, "Error in stream filter:"), color=bcolors.RED)
+			color_print(tbformat(e, "Error in stream filter:"), color=ansi_colors.RED)
 			print()
 
 def cleanup():
