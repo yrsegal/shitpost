@@ -3,11 +3,12 @@ from __future__ import print_function
 from wireutils import *
 color_printing_config.name="Shitposting"
 color_printing_config.color=ansi_colors.BROWN
-config = Config(CONFIGDIR)
 import random
 import tweepy
 
 path = os.path.dirname(__file__)
+CONFIGDIR = os.path.join(path, "shitpostconfig.json")
+config = Config(CONFIGDIR)
 
 genobjects = Config(os.path.join(path, "words.json"))
 def randsub(string, regex):
