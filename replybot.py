@@ -59,7 +59,7 @@ class cSL(tweepy.StreamListener):
 				api.update_status(status=dot+names+" "+text, in_reply_to_status_id = jdata.get('id_str', ''))
 				color_print(format("Sent tweet: {text}", text=dot+names+" "+text))
 			except Exception, e:
-				color_print(tbformat(e, "Error in sending tweet:"), color=ansi_colors.RED)
+				color_print(format_traceback(e, "Error in sending tweet:"), color=ansi_colors.RED)
 		print()
 		return True
  
@@ -87,7 +87,7 @@ def tweetStream():
 		except Exception, e:
 			if isinstance(e, KeyboardInterrupt): 
 				break
-			color_print(tbformat(e, "Error in stream filter:"), color=ansi_colors.RED)
+			color_print(format_traceback(e, "Error in stream filter:"), color=ansi_colors.RED)
 			print()
 
 def cleanup():

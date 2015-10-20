@@ -92,7 +92,7 @@ def main():
 			except Exception, e:
 				if isinstance(e, KeyboardInterrupt):
 					break
-				color_print(tbformat(e, "Error sending tweet:"), color=ansi_colors.YELLOW)
+				color_print(format_traceback(e, "Error sending tweet:"), color=ansi_colors.YELLOW)
 			started = time.time()
 			stopped = time.time()
 			color_print("Slept 0 seconds.")
