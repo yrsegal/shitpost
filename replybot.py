@@ -111,7 +111,7 @@ def centralmain():
 	replyThread.start()
 	mainThread.start()
 	try:
-		while True: time.sleep(0.001)
+		replyThread.join()
 	except KeyboardInterrupt: cleanup()
 
 if __name__ == "__main__": centralmain()

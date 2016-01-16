@@ -1,0 +1,2 @@
+tweepy==3.5.0
+netifaces=0.10.4

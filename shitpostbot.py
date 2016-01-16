@@ -14,7 +14,7 @@ genobjects = Config(os.path.join(path, "words.json"))
 def randsub(string, regex):
 	global genwords
 	if regex not in genwords or not genwords[regex]:
-		genwords[regex] = genobjects[genobjects["@replaces"][regex]]
+		genwords[regex] = genobjects[genobjects["@replaces"][regex]][:]
 	word = genwords[regex].pop(random.randrange(len(genwords[regex])))
 	return re.sub("%"+regex, word, string, 1)
 
