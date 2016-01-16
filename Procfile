@@ -1,1 +1,2 @@
-web: python replybot.py
+reply: python replybot.py
+shit: python shitpostbot.py
