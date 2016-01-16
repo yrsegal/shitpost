@@ -8,7 +8,17 @@ import tweepy
 
 path = os.path.dirname(__file__)
 CONFIGDIR = os.path.join(path, "shitpostconfig.json")
+if not os.path.exists(CONFIGDIR):
+	json.dump({
+		"time": 360,
+		"notifytime": 60,
+		"searchfor": ["gimme a shitpost", "gimme a public shitpost"],
+		"public": "public",
+		"notags": ["just", "do it"]
+		}, open(os.path.join(path, "shitpostconfig.json"), "w"), indent=2, sort_keys=True)
 config = Config(CONFIGDIR)
+	
+
 
 genobjects = Config(os.path.join(path, "words.json"))
 def randsub(string, regex):
