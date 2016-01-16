@@ -1,1 +1,1 @@
-web: gunicorn replybot --log-file -
+web: python replybot.py
