@@ -1,5 +1,7 @@
 # shitpost
 
+# Live on [twitter](http://twitter.com/postingshittily)
+
 ## Dependencies:
 `tweepy`  
 Optional: `netifaces`
